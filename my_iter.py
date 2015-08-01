@@ -51,6 +51,22 @@ class zrange:
     def __iter__(self):
         return zrange_iter(self.n)
 
+
+class reverse_iter:
+
+    def __init__(self, data):
+        self.data = data
+        self.index = len(data)
+
+    def __iter__(self):
+        self
+
+    def __next__(self):
+        if self.index == 0:
+            raise StopIteration
+        self.index -= 1
+        return self.data[self.index]
+
 if __name__ == '__main__':
     y = yrange(5)
     print('first list(y)')
