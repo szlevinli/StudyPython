@@ -1,13 +1,14 @@
-########################
-# 理解iterator
-#
-# 如果需要编写一个具有iteratble的iterator类，则必须实现以下两个函数
-# __iter__
-# __next__
-########################
+"""理解iterator
+
+如果需要编写一个具有iteratble的iterator类，则必须实现以下两个函数
+__iter__
+__next__
+"""
 
 
 class yrange:
+
+    """标准的iterator类 实现了__iter__()和__next__()"""
 
     def __init__(self, n):
         self.i = 0
@@ -27,6 +28,8 @@ class yrange:
 
 class zrange_iter:
 
+    """标准的iterator类 主要和zrange类联合使用"""
+
     def __init__(self, n):
         self.i = 0
         self.n = n
@@ -44,6 +47,12 @@ class zrange_iter:
 
 
 class zrange:
+
+    """非标准的iterator类 主要和zrange_iter类联合使用
+
+    他是其的包装类 可实现多次next()而不耗尽itme
+    实现的核心是__iter__()函数 他返回zrange_iter
+    """
 
     def __init__(self, n):
         self.n = n
