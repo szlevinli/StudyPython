@@ -18,5 +18,6 @@ def func1():
 def func2():
     print("inside func2()")
 
+print("start...")
 func1()
 func2()

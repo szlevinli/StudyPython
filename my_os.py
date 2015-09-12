@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 '''study os moudle
 '''
 
@@ -39,11 +41,39 @@ def lsFileStat(path):
 
 
 def dirtree(path, depth=0):
+    """
+    按指定格式打印目录树
+
+    path=目录
+    depth=目录层级 主要用于递归调用是使用
+
+    目录树格式
+    foo
+    |-- a.txt [file]
+    |-- b.txt [file]
+    |-- code
+    |   |-- a.py [file]
+    |   |-- b.py [file]
+    |   |-- docs
+    |   |   |-- a.txt [file]
+    |   |   \-- b.txt [file]
+    |   \-- x.py [file]
+    |-- y.txt [file]
+    \-- z
+    """
+
+    # 对目录list进行排序 排序时按小写字母排序
     l = sorted(os.listdir(path), key=str.lower)
+    # get basename
     bn = os.path.basename(path)  # basename
+    
+    # 目录树中的前缀变量初始化
     pre = '|   '
     pre_f = '|-- '
-    pre_f2 = '\--'
+    pre_f2 = '\-- '
+    
+    # 处理basename的打印方式
+    # if `path=/user/foo` then `basename=foo`
     if depth == 0:
         print(bn)
     else:
@@ -51,11 +81,21 @@ def dirtree(path, depth=0):
             pre_f = pre_f2
         s = pre * (depth - 1) + pre_f + bn
         print(s.lstrip())
+
+    # 处理目录list中的iterm
     for f in l:
         if os.path.isfile(os.path.join(path, f)):
+            # handle file
             if l.index(f) + 1 == len(l):
                 pre_f = pre_f2
             s = pre * depth + pre_f + f + ' [file]'
             print(s.lstrip())
         else:
+            # handle directory
+            # recursion
             dirtree(os.path.join(path, f), depth + 1)
+
+if __name__ == '__main__':
+    import sys
+    dirtree(sys.argv[1])
+

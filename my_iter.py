@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """理解iterator
 
 如果需要编写一个具有iteratble的iterator类，则必须实现以下两个函数
@@ -82,11 +84,13 @@ if __name__ == '__main__':
     print(list(y))
     print('second list(y)')
     print(list(y))
-    print('第二次list(y)时，返回空的list，这是因为y.__next__()已经没有item了！')
+    print('第二次list(y)时，返回空的list，\
+            这是因为y.__next__()已经没有item了！')
 
     print('*' * 10)
 
-    print('但z不同，无论list(z)几次他都能返回item，因为y和z的__iter__()函数写法不同')
+    print('但z不同，无论list(z)几次他都能返回item，\
+            因为y和z的__iter__()函数写法不同')
     z = zrange(5)
     print(list(z))
     print(list(z))
