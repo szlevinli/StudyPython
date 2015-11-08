@@ -58,8 +58,11 @@ def _getMiniChargedOfferPrice(prodCode):
 def calculateChargedWeight(longs=0, widths=0, highs=0,
                            rate=6000, grossWeight=0):
     '''计算计费重量
-    longs=长 cm, widths=宽 cm, highs=高 cm
-    rate=轻抛比, grossWeight=毛重
+    @param longs->float unit:cm
+    @param widths->float unit:cm
+    @param highs->float unit:cm
+    @param rate->int 轻抛比 (6000/9000/12000)
+    @param grossWeight->float 毛重
     '''
     chargeWeight = (longs * widths * highs) / rate
     return chargeWeight if chargeWeight > grossWeight else grossWeight
@@ -94,7 +97,9 @@ def calculateOverLongPrice(overLongChargedWeight,
     return calculateOverWeightPrice(overLongChargedWeight,
                                     unitPrice, miniChargedPrice)
 if __name__ == '__main__':
-    print('start...')
+    overWeightPrice = 0
+    overLongPrice = 0
+
     longs = 79
     widths = 81
     highs = 150
@@ -102,6 +107,7 @@ if __name__ == '__main__':
     regionType = 'R20101'  # 区域类型
     grossWeights = 89.61
     pieces = 1
+
     # 单价
     unitPrice = _getOfferPrice(productCode)
     # 最低收费
@@ -111,8 +117,16 @@ if __name__ == '__main__':
     # 计费重量
     chargedWeight = calculateChargedWeight(
         longs, widths, highs, rate, grossWeights)
+    # 超长计费重量
+    overLongChargedWeight = calculateOverLongChargedWeight(
+        longs, widths, highs, rate, grossWeights)
+
     if isOverWeight(grossWeights, pieces, threshold=80):
-            calculateOverWeightPrice(chargedWeight, unitPrice,
-                                     miniChargedPrice)
+        overWeightPrice = calculateOverWeightPrice(
+            chargedWeight, unitPrice, miniChargedPrice)
     else:
-        pass
+        overLongPrice = calculateOverLongPrice(
+            overLongChargedWeight, unitPrice, miniChargedPrice)
+
+    print("overWeightPrice = ", overWeightPrice)
+    print("overLongPrice = ", overLongPrice)
