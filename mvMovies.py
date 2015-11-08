@@ -7,3 +7,7 @@ def mvMovies():
               glob.glob('/Users/levin/Downloads/**/*.rmvb') +
               glob.glob('/Users/levin/Downloads/**/*.mp4')):
         shutil.move(f, '/Users/levin/Documents/movies')
+
+if __name__ == '__main__':
+    mvMovies()
+
