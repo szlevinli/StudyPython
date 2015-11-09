@@ -142,9 +142,6 @@ def calculateOverLongPrice(overLongChargedWeight,
     return calculateOverWeightPrice(overLongChargedWeight,
                                     unitPrice, miniChargedPrice)
 if __name__ == '__main__':
-    overWeightPrice = 0
-    overLongPrice = 0
-
     longs = 79
     widths = 81
     highs = 150
@@ -173,15 +170,19 @@ if __name__ == '__main__':
     overLongPerimeterThreshold = _getOverLongPerimeterThreshold()
 
     if isOverWeight(grossWeights, pieces, overWeightThreshold):
-        overWeightPrice = calculateOverWeightPrice(
+        # 超重 使用【计费重量】参与计算
+        price = calculateOverWeightPrice(
             chargedWeight, unitPrice, miniChargedPrice)
     elif isOverLong(longs, widths, highs,
                     overLongSingleThreshold,
-                    overLongPerimeterThreshold):
-        overLongPrice = calculateOverLongPrice(
+                    overLongPerimeterThreshold) and \
+            pieces > 1:
+        # 超长且是子母件 使用【超长计费重量】参与计算
+        price = calculateOverLongPrice(
             overLongChargedWeight, unitPrice, miniChargedPrice)
     else:
-        pass
+        # 超长且非子母件 使用【计费重量】参与计算
+        price = calculateOverLongPrice(
+            chargedWeight, unitPrice, miniChargedPrice)
 
-    print("overWeightPrice = ", overWeightPrice)
-    print("overLongPrice = ", overLongPrice)
+    print("price = ", price)
