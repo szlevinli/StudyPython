@@ -37,7 +37,7 @@ def _getRate(prodCode, regionType):
     @param regionType->str 区域类型编码 R20101(省内件)/...
     @return->float 轻抛比 6000/9000/12000
     '''
-    return 9000
+    return 6000
 
 
 def _getPrice(prodCode):
@@ -143,13 +143,16 @@ def calculateOverLongPrice(overLongChargedWeight,
                                     unitPrice, miniChargedPrice)
 
 if __name__ == '__main__':
-    longs = 79
-    widths = 81
-    highs = 150
+    longs = 978000
+    widths = 1
+    highs = 1
+    overLongs = 161
+    overWidths = 161
+    overHighs = 1
     productCode = 'VA0006'
     regionType = 'R20101'  # 区域类型
-    grossWeights = 89.61
-    pieces = 5
+    grossWeights = 160
+    pieces = 2
 
     # 单价
     unitPrice = _getOfferPrice(productCode)
@@ -162,7 +165,7 @@ if __name__ == '__main__':
         longs, widths, highs, rate, grossWeights)
     # 超长计费重量
     overLongChargedWeight = calculateOverLongChargedWeight(
-        longs, widths, highs, rate, grossWeights)
+        overLongs, overWidths, overHighs, rate, grossWeights)
     # 超重阈值
     overWeightThreshold = _getOverWeightThreshold()
     # 超长单边阈值
