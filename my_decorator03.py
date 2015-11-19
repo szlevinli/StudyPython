@@ -1,4 +1,5 @@
 def entryExit(f):
+    print('enter entryExit function')
     def new_f():
         print("Entering", f.__name__)
         f()
@@ -15,6 +16,7 @@ def func1():
 def func2():
     print("inside func2()")
 
+print('start...')
 func1()
 func2()
 print("func1.__name__ is", func1.__name__)
