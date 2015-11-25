@@ -4,10 +4,10 @@ import mysql.connector
 
 optionFiles = 'connnector_config.ini'
 query = (" select"
-         "    t.cust_code"
-         "    ,t.start_dt"
+         "    t.f1"
+         "    ,t.f2"
          " from"
-         "    tmp_03 t"
+         "    tb2 t"
          " limit %s, %s")
 try:
     cnx = mysql.connector.connect(option_files=optionFiles)
