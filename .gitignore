@@ -59,4 +59,5 @@ target/
 
 # add by levn
 ENV*/
+.vscode/
 
