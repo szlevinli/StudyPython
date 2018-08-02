@@ -5,12 +5,16 @@ class A:
   def __init__(self, parName='anymore', parAge = 10):
     self.name = parName
     self.age = parAge
+    self.__n = 'n'
 
 print('A.name =', A.name)
 
 a1 = A()
 a2 = A('lhq', 100)
 a3 = A('wwj', 16)
+
+a1.__n = 'w'
+print(a1.__n)
 
 # 对象属性覆盖类属性
 print('a1.name = {}, a1.age = {}'.format(a1.name, a1.age))
